@@ -1540,7 +1540,7 @@ class PeraWalletClient extends BaseClient {
         return signedTxns;
     }
     async signBytes(data, signer) {
-        const result = await this.signTransactions([signer], [data]);
+        const result = await this.#client.signData([{ data: data, message: "Sign message for login" }], signer);
         return result[0];
     }
 }
