@@ -24,6 +24,7 @@ export default function useWallet(): {
         txId: string;
         id: string;
     }>;
+    signBytes: (data: Uint8Array) => Promise<Uint8Array>;
     getAddress: () => string | undefined;
     groupTransactionsBySender: (transactions: TransactionsArray) => Record<string, import("../types").TxnInfo[]>;
     getAccountInfo: () => Promise<import("../types").AccountInfo>;

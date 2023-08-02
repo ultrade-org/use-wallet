@@ -33,5 +33,6 @@ declare class AlgoSignerClient extends BaseClient {
     signTransactions(connectedAccounts: string[], transactions: Uint8Array[], indexesToSign?: number[], returnGroup?: boolean): Promise<Uint8Array[]>;
     getGenesisID(): string;
     getAuthAddress(address: string): string | undefined;
+    signBytes(data: Uint8Array, signer: string): Promise<Uint8Array>;
 }
 export default AlgoSignerClient;

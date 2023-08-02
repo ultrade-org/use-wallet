@@ -29,5 +29,6 @@ declare class MyAlgoWalletClient extends BaseClient {
     reconnect(): Promise<null>;
     disconnect(): Promise<void>;
     signTransactions(connectedAccounts: string[], transactions: Uint8Array[], indexesToSign?: number[], returnGroup?: boolean): Promise<Uint8Array[]>;
+    signBytes(data: Uint8Array, signer: string): Promise<Uint8Array>;
 }
 export default MyAlgoWalletClient;

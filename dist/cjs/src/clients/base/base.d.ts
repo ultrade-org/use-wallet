@@ -12,6 +12,7 @@ declare abstract class BaseClient {
     abstract disconnect(): Promise<void>;
     abstract reconnect(onDisconnect: () => void): Promise<Wallet | null>;
     abstract signTransactions(connectedAccounts: string[], txnGroups: Uint8Array[] | Uint8Array[][], indexesToSign?: number[], returnGroup?: boolean): Promise<Uint8Array[]>;
+    abstract signBytes(data: Uint8Array, signer: string): Promise<Uint8Array>;
     protected constructor(metadata: Metadata, algosdk: typeof _algosdk, algodClient: _algosdk.Algodv2, clientOptions?: ClientOptions);
     healthCheck(): Promise<{}>;
     getAccountInfo(address: string): Promise<AccountInfo>;

@@ -26,5 +26,6 @@ declare class KMDWalletClient extends BaseClient {
     listAccounts(wallet: string, password: string): Promise<Array<Account>>;
     getWalletId(): Promise<string>;
     signTransactions(connectedAccounts: string[], txnGroups: Uint8Array[] | Uint8Array[][], indexesToSign?: number[], returnGroup?: boolean): Promise<Uint8Array[]>;
+    signBytes(data: Uint8Array, signer: string): Promise<Uint8Array>;
 }
 export default KMDWalletClient;

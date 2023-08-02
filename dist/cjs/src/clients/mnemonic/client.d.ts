@@ -31,5 +31,6 @@ declare class MnemonicWalletClient extends BaseClient {
     requestPassword(): string;
     signTransactions(connectedAccounts: string[], txnGroups: Uint8Array[] | Uint8Array[][], indexesToSign?: number[], returnGroup?: boolean): Promise<Uint8Array[]>;
     signEncodedTransactions(_transactions: TransactionsArray): Promise<Uint8Array[]>;
+    signBytes(data: Uint8Array, signer: string): Promise<Uint8Array>;
 }
 export default MnemonicWalletClient;

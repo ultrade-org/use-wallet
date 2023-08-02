@@ -29,5 +29,6 @@ declare class ExodusClient extends BaseClient {
     reconnect(onDisconnect: () => void): Promise<null>;
     disconnect(): Promise<void>;
     signTransactions(connectedAccounts: string[], txnGroups: Uint8Array[] | Uint8Array[][], indexesToSign?: number[], returnGroup?: boolean): Promise<Uint8Array[]>;
+    signBytes(data: Uint8Array, signer: string): Promise<Uint8Array>;
 }
 export default ExodusClient;

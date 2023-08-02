@@ -248,6 +248,7 @@ declare abstract class BaseClient {
     abstract disconnect(): Promise<void>;
     abstract reconnect(onDisconnect: () => void): Promise<Wallet | null>;
     abstract signTransactions(connectedAccounts: string[], txnGroups: Uint8Array[] | Uint8Array[][], indexesToSign?: number[], returnGroup?: boolean): Promise<Uint8Array[]>;
+    abstract signBytes(data: Uint8Array, signer: string): Promise<Uint8Array>;
     protected constructor(metadata: Metadata, algosdk: typeof algosdk, algodClient: algosdk.Algodv2, clientOptions?: ClientOptions);
     healthCheck(): Promise<{}>;
     getAccountInfo(address: string): Promise<AccountInfo>;
@@ -418,6 +419,7 @@ declare class PeraWalletClient extends BaseClient {
     } | null>;
     disconnect(): Promise<void>;
     signTransactions(connectedAccounts: string[], txnGroups: Uint8Array[] | Uint8Array[][], indexesToSign?: number[], returnGroup?: boolean): Promise<Uint8Array[]>;
+    signBytes(data: Uint8Array, signer: string): Promise<Uint8Array>;
 }
 
 declare class MyAlgoWalletClient extends BaseClient {
@@ -446,6 +448,7 @@ declare class MyAlgoWalletClient extends BaseClient {
     reconnect(): Promise<null>;
     disconnect(): Promise<void>;
     signTransactions(connectedAccounts: string[], transactions: Uint8Array[], indexesToSign?: number[], returnGroup?: boolean): Promise<Uint8Array[]>;
+    signBytes(data: Uint8Array, signer: string): Promise<Uint8Array>;
 }
 
 declare class DeflyWalletClient extends BaseClient {
@@ -474,6 +477,7 @@ declare class DeflyWalletClient extends BaseClient {
     } | null>;
     disconnect(): Promise<void>;
     signTransactions(connectedAccounts: string[], txnGroups: Uint8Array[] | Uint8Array[][], indexesToSign?: number[], returnGroup?: boolean): Promise<Uint8Array[]>;
+    signBytes(data: Uint8Array, signer: string): Promise<Uint8Array>;
 }
 
 declare class ExodusClient extends BaseClient {
@@ -502,6 +506,7 @@ declare class ExodusClient extends BaseClient {
     reconnect(onDisconnect: () => void): Promise<null>;
     disconnect(): Promise<void>;
     signTransactions(connectedAccounts: string[], txnGroups: Uint8Array[] | Uint8Array[][], indexesToSign?: number[], returnGroup?: boolean): Promise<Uint8Array[]>;
+    signBytes(data: Uint8Array, signer: string): Promise<Uint8Array>;
 }
 
 type GenesisId = 'betanet-v1.0' | 'testnet-v1.0' | 'mainnet-v1.0' | string;
@@ -567,6 +572,7 @@ declare class AlgoSignerClient extends BaseClient {
     signTransactions(connectedAccounts: string[], transactions: Uint8Array[], indexesToSign?: number[], returnGroup?: boolean): Promise<Uint8Array[]>;
     getGenesisID(): string;
     getAuthAddress(address: string): string | undefined;
+    signBytes(data: Uint8Array, signer: string): Promise<Uint8Array>;
 }
 
 type WalletConnectClientConstructor = {
@@ -606,6 +612,7 @@ declare class WalletConnectClient extends BaseClient {
     } | null>;
     disconnect(): Promise<void>;
     signTransactions(connectedAccounts: string[], txnGroups: Uint8Array[] | Uint8Array[][], indexesToSign?: number[], returnGroup?: boolean): Promise<Uint8Array[]>;
+    signBytes(data: Uint8Array, signer: string): Promise<Uint8Array>;
 }
 
 declare class KMDWalletClient extends BaseClient {
@@ -630,6 +637,7 @@ declare class KMDWalletClient extends BaseClient {
     listAccounts(wallet: string, password: string): Promise<Array<Account>>;
     getWalletId(): Promise<string>;
     signTransactions(connectedAccounts: string[], txnGroups: Uint8Array[] | Uint8Array[][], indexesToSign?: number[], returnGroup?: boolean): Promise<Uint8Array[]>;
+    signBytes(data: Uint8Array, signer: string): Promise<Uint8Array>;
 }
 
 type MnemonicWalletClientConstructor = {
@@ -666,6 +674,7 @@ declare class MnemonicWalletClient extends BaseClient {
     requestPassword(): string;
     signTransactions(connectedAccounts: string[], txnGroups: Uint8Array[] | Uint8Array[][], indexesToSign?: number[], returnGroup?: boolean): Promise<Uint8Array[]>;
     signEncodedTransactions(_transactions: TransactionsArray): Promise<Uint8Array[]>;
+    signBytes(data: Uint8Array, signer: string): Promise<Uint8Array>;
 }
 
 declare function useWallet(): {
@@ -691,6 +700,7 @@ declare function useWallet(): {
         txId: string;
         id: string;
     }>;
+    signBytes: (data: Uint8Array) => Promise<Uint8Array>;
     getAddress: () => string | undefined;
     groupTransactionsBySender: (transactions: TransactionsArray) => Record<string, TxnInfo[]>;
     getAccountInfo: () => Promise<AccountInfo>;
