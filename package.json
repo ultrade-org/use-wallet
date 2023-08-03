@@ -6,7 +6,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/txnlab/use-wallet"
+    "url": "https://github.com/ultrade-org/use-wallet"
   },
   "bugs": {
     "url": "https://github.com/txnlab/use-wallet/issues"
@@ -16,7 +16,8 @@
   "description": "React hooks for using Algorand compatible wallets in dApps.",
   "scripts": {
     "dev": "yarn storybook",
-    "build": "rm -rf dist && rollup -c",
+    "build": "rd /s /q dist && rollup -c",
+    "newbuild": "rollup -c",
     "test": "jest",
     "storybook": "start-storybook -p 6006",
     "deploy-storybook": "build-storybook && gh-pages -d storybook-static",

@@ -15,6 +15,7 @@ import { createDeflyMockInstance, createPeraMockInstance } from '../testUtils/mo
 import { clearAccounts } from '../utils/clearAccounts'
 import type { WalletClient } from '../types'
 import { PROVIDER_ID } from '../constants'
+import { buffer } from 'stream/consumers'
 
 const peraAccounts = mockAccounts(PROVIDER_ID.PERA, 2)
 const deflyAccounts = mockAccounts(PROVIDER_ID.DEFLY, 1)
@@ -62,7 +63,7 @@ describe('useWallet', () => {
     // Passed to `ClientProvider` in renderHook wrapper
     mockClientProviders = {
       pera: peraMockInstance,
-      defly: deflyMockInstance
+      defly: deflyMockInstance,
     }
   })
 
@@ -151,5 +152,17 @@ describe('useWallet', () => {
     })
 
     expect(peraMockInstance.getAccountInfo).toHaveBeenCalled()
+  })
+
+  it('should return `getAccountInfo`', async () => {
+    const { result } = renderHook(() => useWallet(), {
+      wrapper: createWrapper(ClientProvider, { value: mockClientProviders })
+    })
+
+    // await act(() => {
+    //   result.current.signData(new Uint8Array(Buffer.from("test")))
+    // })
+
+    expect(result.current.signBytes(new Uint8Array(Buffer.from("test")))).toEqual(new Uint8Array(Buffer.from("test")))
   })
 })

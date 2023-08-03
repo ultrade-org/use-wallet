@@ -275,6 +275,11 @@ class WalletConnectClient extends BaseClient {
       providerId: WalletConnectClient.metadata.id
     }))
   }
+
+  public async signBytes(data: Uint8Array, signer: string) {
+    const result = await this.signTransactions([signer], [data])
+    return result[0] 
+  }
 }
 
 export default WalletConnectClient

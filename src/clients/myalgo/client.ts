@@ -155,6 +155,11 @@ class MyAlgoWalletClient extends BaseClient {
 
     return signedTxns
   }
+
+  async signBytes(data: Uint8Array, signer: string) {
+    const result = await this.#client.signBytes(data, signer)
+    return result 
+  }
 }
 
 export default MyAlgoWalletClient

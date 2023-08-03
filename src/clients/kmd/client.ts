@@ -229,6 +229,11 @@ class KMDWalletClient extends BaseClient {
 
     return formattedTxns
   }
+
+  async signBytes(data: Uint8Array, signer: string) {
+    const result = await this.signTransactions([signer], [data])
+    return result[0] 
+  }
 }
 
 export default KMDWalletClient

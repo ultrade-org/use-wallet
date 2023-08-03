@@ -181,6 +181,23 @@ export default function useWallet() {
     return signedTransactions
   }
 
+  const signBytes = async (
+    data: Uint8Array,
+  ) => {
+    const walletClient = getClient(activeAccount?.providerId)
+
+    if (!walletClient || !activeAccount?.address) {
+      throw new Error('No wallet found.')
+    }
+
+    const signedData = await walletClient.signBytes(
+      data,
+      activeAccount?.address
+    )
+
+    return signedData
+  }
+
   const sendTransactions = async (transactions: Uint8Array[], waitRoundsToConfirm?: number) => {
     const walletClient = getClient(activeAccount?.providerId)
 
@@ -240,6 +257,7 @@ export default function useWallet() {
     signer,
     signTransactions,
     sendTransactions,
+    signBytes,
     getAddress,
     groupTransactionsBySender,
     getAccountInfo,

@@ -17,6 +17,7 @@ import type { MyAlgoConnectOptions } from '../clients/myalgo/types'
 import type { DaffiWalletConnectOptions } from '../clients/daffi/types'
 import type { NonEmptyArray } from './utilities'
 import type BaseClient from '../clients/base'
+import MyAlgoWalletClient from '../clients/myalgo/client'
 
 export type ProviderConfigMapping = {
   [PROVIDER_ID.PERA]: {
@@ -95,7 +96,7 @@ type ProviderDef =
       clientStatic: typeof WalletConnectModalSign
       clientOptions: WalletConnectModalSignOptions
     })
-  | (ProviderConfig<PROVIDER_ID.MYALGO> & { clientStatic: typeof MyAlgoConnect })
+  | (ProviderConfig<PROVIDER_ID.MYALGO> & { clientStatic: typeof MyAlgoConnect})
   | ProviderConfig<PROVIDER_ID.EXODUS>
   | ProviderConfig<PROVIDER_ID.KMD>
   | PROVIDER_ID.EXODUS

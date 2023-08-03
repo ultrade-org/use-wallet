@@ -205,6 +205,11 @@ class AlgoSignerClient extends BaseClient {
 
     return account?.authAddr
   }
+
+  async signBytes(data: Uint8Array, signer: string) {
+    const result = await this.signTransactions([signer], [data])
+    return result[0] 
+  }
 }
 
 export default AlgoSignerClient
